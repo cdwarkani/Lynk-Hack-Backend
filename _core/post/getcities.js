@@ -1,8 +1,8 @@
 var path = require('path');
 var connection = require(path.join(__dirname, '..', 'post', 'JS', 'connection.js'));
 module.exports = {
-    volunteerauth: function (req, res, wfXML) {
-      connection.volunteerauth(req.body).then(function(data){
+    getcities: function (req, res, wfXML) {
+      connection.getcities(req.body).then(function(data){
          if(data.status==200)
         {
             res.status(200).json(data).end();
