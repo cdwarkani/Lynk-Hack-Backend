@@ -1,9 +1,8 @@
 var path = require('path');
 var connection = require(path.join(__dirname, '..', 'post', 'JS', 'connection.js'));
 module.exports = {
-    creategroup: function (req, res, wfXML) {
-      connection.creategroup(req.body).then(function(data){
-          console.log(req.body);
+    helpsomeone: function (req, res, wfXML) {
+      connection.helpsomeone(req.body).then(function(data){
          if(data.status==200)
         {
             res.status(200).json(data).end();
