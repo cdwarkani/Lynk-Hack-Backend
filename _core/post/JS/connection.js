@@ -283,6 +283,86 @@ module.exports = {
 
 
         });
+    }, getvictimshelpmap: function (data) {
+        return new Promise(function (resolve, reject) {
+            var connection = mysql.createPool({
+                host: '139.59.94.48',
+                user: 'playtowindbuser',
+                password: 'Gameuser@123',
+                database: 'LynkHack'
+            });
+
+            connection.getConnection(function (err) {
+                var queryValue = "select * from VictimsHelpMap";
+                if (err) {
+                    resolve({ "status": 400, "error": err });
+                    connection.end();
+                    return;
+                }
+                if (data.VictimID) {
+                    queryValue += " where VictimID = " + data.VictimID;
+                } else {
+                    resolve({ "status": 400, "error": "No CityID field found" });
+                    connection.end();
+                    return;
+
+                }
+                connection.query(queryValue, function (err, result, fields) {
+                    if (err) {
+                        resolve({ "status": 400, "error": err });
+                        connection.end();
+                        return;
+                    }
+                    resolve({ "status": 200, "data": result, "isSuccess": true });
+
+                    connection.end();
+                    return;
+
+                });
+            });
+
+
+        });
+    }, getvolunteerhelpmap: function (data) {
+        return new Promise(function (resolve, reject) {
+            var connection = mysql.createPool({
+                host: '139.59.94.48',
+                user: 'playtowindbuser',
+                password: 'Gameuser@123',
+                database: 'LynkHack'
+            });
+
+            connection.getConnection(function (err) {
+                var queryValue = "select * from VolunteerResourceMap";
+                if (err) {
+                    resolve({ "status": 400, "error": err });
+                    connection.end();
+                    return;
+                }
+                if (data.VolunteerID) {
+                    queryValue += " where VolunteerID = " + data.VolunteerID;
+                } else {
+                    resolve({ "status": 400, "error": "No VolunteerID field found" });
+                    connection.end();
+                    return;
+
+                }
+                connection.query(queryValue, function (err, result, fields) {
+                    if (err) {
+                        resolve({ "status": 400, "error": err });
+                        connection.end();
+                        return;
+                    }
+                    resolve({ "status": 200, "data": result, "isSuccess": true });
+
+                    connection.end();
+                    return;
+
+                });
+            });
+
+
+        });
     },
     creategroup: function (data) {
         return new Promise(function (resolve, reject) {
@@ -1008,61 +1088,61 @@ module.exports = {
         });
     },
     iscompletevolunteer: function (data) {
-       return new Promise(function (resolve, reject) {
-        var connection = mysql.createPool({
-            host: '139.59.94.48',
-            user: 'playtowindbuser',
-            password: 'Gameuser@123',
-            database: 'LynkHack'
-        });
-        connection.getConnection(function (err) {
-            var queryValue = "UPDATE `LynkHack`.`VolunteerResourceMap` SET `isCompleted` = '" + '1' + "' WHERE `VRMapID` = '" + data.VRMapID + "';";
+        return new Promise(function (resolve, reject) {
+            var connection = mysql.createPool({
+                host: '139.59.94.48',
+                user: 'playtowindbuser',
+                password: 'Gameuser@123',
+                database: 'LynkHack'
+            });
+            connection.getConnection(function (err) {
+                var queryValue = "UPDATE `LynkHack`.`VolunteerResourceMap` SET `isCompleted` = '" + '1' + "' WHERE `VRMapID` = '" + data.VRMapID + "';";
 
-            connection.query(queryValue, function (err, result, fields) {
-                if (err) {
-                    resolve({ "status": 400, "error": err });
+                connection.query(queryValue, function (err, result, fields) {
+                    if (err) {
+                        resolve({ "status": 400, "error": err });
+                        connection.end();
+                        return;
+                    }
+                    if (result) {
+                        resolve({ "status": 200, "data": result, "isSuccess": true });
+                    }
                     connection.end();
                     return;
-                }
-                if (result) {
-                    resolve({ "status": 200, "data": result, "isSuccess": true });
-                }
-                connection.end();
-                return;
 
+                });
             });
+
+
         });
-
-
-    });
     },
     iscompletevictim: function (data) {
         return new Promise(function (resolve, reject) {
-         var connection = mysql.createPool({
-             host: '139.59.94.48',
-             user: 'playtowindbuser',
-             password: 'Gameuser@123',
-             database: 'LynkHack'
-         });
-         connection.getConnection(function (err) {
-             var queryValue = "UPDATE `LynkHack`.`VictimsHelpMap` SET `isCompleted` = '" + '1' + "' WHERE `VHMapID` = '" + data.VHMapID + "';";
- 
-             connection.query(queryValue, function (err, result, fields) {
-                 if (err) {
-                     resolve({ "status": 400, "error": err });
-                     connection.end();
-                     return;
-                 }
-                 if (result) {
-                     resolve({ "status": 200, "data": result, "isSuccess": true });
-                 }
-                 connection.end();
-                 return;
- 
-             });
-         });
- 
- 
-     });
-     }
+            var connection = mysql.createPool({
+                host: '139.59.94.48',
+                user: 'playtowindbuser',
+                password: 'Gameuser@123',
+                database: 'LynkHack'
+            });
+            connection.getConnection(function (err) {
+                var queryValue = "UPDATE `LynkHack`.`VictimsHelpMap` SET `isCompleted` = '" + '1' + "' WHERE `VHMapID` = '" + data.VHMapID + "';";
+
+                connection.query(queryValue, function (err, result, fields) {
+                    if (err) {
+                        resolve({ "status": 400, "error": err });
+                        connection.end();
+                        return;
+                    }
+                    if (result) {
+                        resolve({ "status": 200, "data": result, "isSuccess": true });
+                    }
+                    connection.end();
+                    return;
+
+                });
+            });
+
+
+        });
+    }
 }
