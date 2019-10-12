@@ -9,7 +9,7 @@ module.exports = {
                 password: 'Gameuser@123',
                 database: 'LynkHack'
             });
-            
+
             connection.getConnection(function (err) {
                 var queryValue = "SELECT * FROM LynkHack.Victims as Vi JOIN Volunteer as Vo on Vi.PhoneNo = Vo.PhoneNo";
                 if (err) {
@@ -19,12 +19,11 @@ module.exports = {
                 }
                 if (data.phoneNo) {
                     queryValue += " where Vi.PhoneNo = " + data.phoneNo;
-                }else
-                {
-                        resolve({ "status": 400, "error": "No phoneNo field found" });
-                        connection.end();
-                        return;
-                    
+                } else {
+                    resolve({ "status": 400, "error": "No phoneNo field found" });
+                    connection.end();
+                    return;
+
                 }
                 if (data.lowLimit && data.HighLimit) {
                     queryValue += " LIMIT " + data.lowLimit + "," + data.HighLimit;
@@ -70,80 +69,73 @@ module.exports = {
                 }
 
                 if (data.phoneNo) {
-                    queryValue += "'" + data.phoneNo+"',";
-                    queryValue2 += "'" + data.phoneNo+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No phoneNo field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.phoneNo + "',";
+                    queryValue2 += "'" + data.phoneNo + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No phoneNo field found" });
+                    connection.end();
+                    return;
+
                 }
 
                 if (data.Name) {
-                    queryValue += "'" + data.Name+"',";
-                    queryValue2 += "'" + data.Name+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No Name field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.Name + "',";
+                    queryValue2 += "'" + data.Name + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No Name field found" });
+                    connection.end();
+                    return;
+
                 }
 
                 if (data.Address) {
-                    queryValue += "'" + data.Address+"',";
-                    queryValue2 += "'" + data.Address+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No Address field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.Address + "',";
+                    queryValue2 += "'" + data.Address + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No Address field found" });
+                    connection.end();
+                    return;
+
                 }
 
                 if (data.Latitude) {
-                    queryValue += "'" + data.Latitude+"',";
-                    queryValue2 += "'" + data.Latitude+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No Latitude field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.Latitude + "',";
+                    queryValue2 += "'" + data.Latitude + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No Latitude field found" });
+                    connection.end();
+                    return;
+
                 }
                 if (data.Longitude) {
-                    queryValue += "'" + data.Longitude+"',";
-                    queryValue2 += "'" + data.Longitude+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No Longitude field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.Longitude + "',";
+                    queryValue2 += "'" + data.Longitude + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No Longitude field found" });
+                    connection.end();
+                    return;
+
                 }
 
                 if (data.AreaID) {
-                    queryValue += "'" + data.AreaID+"',";
-                    queryValue2 += "'" + data.AreaID+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No AreaID field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.AreaID + "',";
+                    queryValue2 += "'" + data.AreaID + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No AreaID field found" });
+                    connection.end();
+                    return;
+
                 }
                 queryValue += "'2019-01-01 00:00:00','2019-01-01 00:00:00','1.1.1.1','1')";
                 queryValue2 += "'2019-01-01 00:00:00','2019-01-01 00:00:00','1.1.1.1','1')";
                 var queryValue3 = "SELECT * FROM LynkHack.Victims as Vi JOIN Volunteer as Vo on Vi.PhoneNo = Vo.PhoneNo";
                 if (data.phoneNo) {
-                    queryValue3 += " where Vi.PhoneNo ="+"'" + data.phoneNo+"';";;
-                }else
-                {
-                        resolve({ "status": 400, "error": "No phoneNo field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue3 += " where Vi.PhoneNo =" + "'" + data.phoneNo + "';";;
+                } else {
+                    resolve({ "status": 400, "error": "No phoneNo field found" });
+                    connection.end();
+                    return;
+
                 }
 
                 connection.query(queryValue, function (err, result, fields) {
@@ -169,9 +161,9 @@ module.exports = {
                             }
                             connection.end();
                             return;
-        
+
                         });
-    
+
                     });
 
                 });
@@ -179,7 +171,7 @@ module.exports = {
 
 
         });
-    },getstates: function (data) {
+    }, getstates: function (data) {
         return new Promise(function (resolve, reject) {
             var connection = mysql.createPool({
                 host: '139.59.94.48',
@@ -187,7 +179,7 @@ module.exports = {
                 password: 'Gameuser@123',
                 database: 'LynkHack'
             });
-            
+
             connection.getConnection(function (err) {
                 var queryValue = "select * from States";
                 if (err) {
@@ -201,8 +193,8 @@ module.exports = {
                         connection.end();
                         return;
                     }
-                    resolve({ "status": 200, "data": result,  "isSuccess": true });
-              
+                    resolve({ "status": 200, "data": result, "isSuccess": true });
+
                     connection.end();
                     return;
 
@@ -211,7 +203,7 @@ module.exports = {
 
 
         });
-    },getcities: function (data) {
+    }, getcities: function (data) {
         return new Promise(function (resolve, reject) {
             var connection = mysql.createPool({
                 host: '139.59.94.48',
@@ -219,7 +211,7 @@ module.exports = {
                 password: 'Gameuser@123',
                 database: 'LynkHack'
             });
-            
+
             connection.getConnection(function (err) {
                 var queryValue = "select * from City";
                 if (err) {
@@ -229,12 +221,11 @@ module.exports = {
                 }
                 if (data.StateID) {
                     queryValue += " where StateID = " + data.StateID;
-                }else
-                {
-                        resolve({ "status": 400, "error": "No StateID field found" });
-                        connection.end();
-                        return;
-                    
+                } else {
+                    resolve({ "status": 400, "error": "No StateID field found" });
+                    connection.end();
+                    return;
+
                 }
                 connection.query(queryValue, function (err, result, fields) {
                     if (err) {
@@ -242,8 +233,8 @@ module.exports = {
                         connection.end();
                         return;
                     }
-                    resolve({ "status": 200, "data": result,  "isSuccess": true });
-              
+                    resolve({ "status": 200, "data": result, "isSuccess": true });
+
                     connection.end();
                     return;
 
@@ -252,7 +243,7 @@ module.exports = {
 
 
         });
-    },getareas: function (data) {
+    }, getareas: function (data) {
         return new Promise(function (resolve, reject) {
             var connection = mysql.createPool({
                 host: '139.59.94.48',
@@ -260,7 +251,7 @@ module.exports = {
                 password: 'Gameuser@123',
                 database: 'LynkHack'
             });
-            
+
             connection.getConnection(function (err) {
                 var queryValue = "select * from Areas";
                 if (err) {
@@ -270,12 +261,11 @@ module.exports = {
                 }
                 if (data.CityID) {
                     queryValue += " where CityID = " + data.CityID;
-                }else
-                {
-                        resolve({ "status": 400, "error": "No CityID field found" });
-                        connection.end();
-                        return;
-                    
+                } else {
+                    resolve({ "status": 400, "error": "No CityID field found" });
+                    connection.end();
+                    return;
+
                 }
                 connection.query(queryValue, function (err, result, fields) {
                     if (err) {
@@ -283,8 +273,8 @@ module.exports = {
                         connection.end();
                         return;
                     }
-                    resolve({ "status": 200, "data": result,  "isSuccess": true });
-              
+                    resolve({ "status": 200, "data": result, "isSuccess": true });
+
                     connection.end();
                     return;
 
@@ -311,94 +301,85 @@ module.exports = {
                 }
 
                 if (data.VolunteerID) {
-                    queryValue += "'" + data.VolunteerID+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No VolunteerID field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.VolunteerID + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No VolunteerID field found" });
+                    connection.end();
+                    return;
+
                 }
 
                 if (data.AreaID) {
-                    queryValue += "'" + data.AreaID+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No AreaID field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.AreaID + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No AreaID field found" });
+                    connection.end();
+                    return;
+
                 }
 
                 if (data.Name) {
-                    queryValue += "'" + data.Name+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No Name field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.Name + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No Name field found" });
+                    connection.end();
+                    return;
+
                 }
 
                 if (data.Description) {
-                    queryValue += "'" + data.Description+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No Description field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.Description + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No Description field found" });
+                    connection.end();
+                    return;
+
                 }
                 if (data.Members) {
-                    queryValue += "'" + data.Members+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No Members field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.Members + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No Members field found" });
+                    connection.end();
+                    return;
+
                 }
 
                 if (data.link) {
-                    queryValue += "'" + data.link+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No AreaID field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.link + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No AreaID field found" });
+                    connection.end();
+                    return;
+
                 }
-               
+
                 queryValue += "'2019-01-01 00:00:00','2019-01-01 00:00:00'";
                 if (data.latitude) {
-                    queryValue += ",'" + data.latitude+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No latitude field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += ",'" + data.latitude + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No latitude field found" });
+                    connection.end();
+                    return;
+
                 }
                 if (data.longitude) {
-                    queryValue += "'" + data.longitude+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No longitude field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.longitude + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No longitude field found" });
+                    connection.end();
+                    return;
+
                 }
                 if (data.isCompleted) {
-                    queryValue += "'" + data.isCompleted+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No isCompleted field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.isCompleted + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No isCompleted field found" });
+                    connection.end();
+                    return;
+
                 }
                 queryValue += "'1')";
-            
+
 
                 connection.query(queryValue, function (err, result, fields) {
                     if (err) {
@@ -428,31 +409,29 @@ module.exports = {
             });
             connection.getConnection(function (err) {
                 var queryValue = "UPDATE `LynkHack`.`Volunteer` SET `AreaID` = ";
-                
+
                 if (err) {
                     resolve({ "status": 400, "error": err });
                     connection.end();
                     return;
                 }
                 if (data.AreaID) {
-                    queryValue += "'" + data.AreaID+"'";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No AreaID field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.AreaID + "'";
+                } else {
+                    resolve({ "status": 400, "error": "No AreaID field found" });
+                    connection.end();
+                    return;
+
                 }
-                 queryValue += " WHERE `VolunteerID` =";
+                queryValue += " WHERE `VolunteerID` =";
 
                 if (data.VolunteerID) {
-                    queryValue += "'" + data.VolunteerID+"';";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No VolunteerID field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.VolunteerID + "';";
+                } else {
+                    resolve({ "status": 400, "error": "No VolunteerID field found" });
+                    connection.end();
+                    return;
+
                 }
 
                 connection.query(queryValue, function (err, result, fields) {
@@ -483,22 +462,21 @@ module.exports = {
             });
             connection.getConnection(function (err) {
                 var queryValue = "Select * from Groups where AreaID= ";
-                
+
                 if (err) {
                     resolve({ "status": 400, "error": err });
                     connection.end();
                     return;
                 }
                 if (data.AreaID) {
-                    queryValue += " '" + data.AreaID+"'";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No AreaID field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += " '" + data.AreaID + "'";
+                } else {
+                    resolve({ "status": 400, "error": "No AreaID field found" });
+                    connection.end();
+                    return;
+
                 }
-                
+
                 connection.query(queryValue, function (err, result, fields) {
                     if (err) {
                         resolve({ "status": 400, "error": err });
@@ -526,23 +504,22 @@ module.exports = {
                 database: 'LynkHack'
             });
             connection.getConnection(function (err) {
-                var queryValue = "Select * from VictimsHelpMap where AreaID= ";
-                
+                var queryValue = "Select * from VictimsHelpMap where isCompleted=0 and AreaID= ";
+
                 if (err) {
                     resolve({ "status": 400, "error": err });
                     connection.end();
                     return;
                 }
                 if (data.AreaID) {
-                    queryValue += " '" + data.AreaID+"'";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No AreaID field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += " '" + data.AreaID + "'";
+                } else {
+                    resolve({ "status": 400, "error": "No AreaID field found" });
+                    connection.end();
+                    return;
+
                 }
-                
+
                 connection.query(queryValue, function (err, result, fields) {
                     if (err) {
                         resolve({ "status": 400, "error": err });
@@ -570,23 +547,22 @@ module.exports = {
                 database: 'LynkHack'
             });
             connection.getConnection(function (err) {
-                var queryValue = "Select * from VictimsHelpMap where AreaID= ";
-                
+                var queryValue = "Select * from Volunteer where VolunteerID= ";
+
                 if (err) {
                     resolve({ "status": 400, "error": err });
                     connection.end();
                     return;
                 }
-                if (data.AreaID) {
-                    queryValue += " '" + data.AreaID+"'";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No AreaID field found" });
-                        connection.end();
-                        return;
-                    
+                if (data.VolunteerID) {
+                    queryValue += " '" + data.VolunteerID + "'";
+                } else {
+                    resolve({ "status": 400, "error": "No VolunteerID field found" });
+                    connection.end();
+                    return;
+
                 }
-                
+
                 connection.query(queryValue, function (err, result, fields) {
                     if (err) {
                         resolve({ "status": 400, "error": err });
@@ -615,13 +591,13 @@ module.exports = {
             });
             connection.getConnection(function (err) {
                 var queryValue = "Select * from HelpType ";
-                
+
                 if (err) {
                     resolve({ "status": 400, "error": err });
                     connection.end();
                     return;
                 }
-                
+
                 connection.query(queryValue, function (err, result, fields) {
                     if (err) {
                         resolve({ "status": 400, "error": err });
@@ -658,59 +634,54 @@ module.exports = {
 
 
                 if (data.VolunteerID) {
-                    queryValue += "'" + data.VolunteerID+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No VolunteerID field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.VolunteerID + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No VolunteerID field found" });
+                    connection.end();
+                    return;
+
                 }
 
 
                 if (data.AreaID) {
-                    queryValue += "'" + data.VolunteerID+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No VolunteerID field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.VolunteerID + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No VolunteerID field found" });
+                    connection.end();
+                    return;
+
                 }
 
                 if (data.HelpID) {
-                    queryValue += "'" + data.HelpID+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No HelpID field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.HelpID + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No HelpID field found" });
+                    connection.end();
+                    return;
+
                 }
 
                 if (data.Description) {
-                    queryValue += "'" + data.Description+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No Description field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.Description + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No Description field found" });
+                    connection.end();
+                    return;
+
                 }
                 queryValue += "'2019-01-01 00:00:00','2019-01-01 00:00:00',"
 
                 if (data.isCompleted) {
-                    queryValue += "'" + data.isCompleted+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No isCompleted field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.isCompleted + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No isCompleted field found" });
+                    connection.end();
+                    return;
+
                 }
 
                 queryValue += "'1')";
-            
+
 
                 connection.query(queryValue, function (err, result, fields) {
                     if (err) {
@@ -729,8 +700,8 @@ module.exports = {
 
 
         });
-    }, 
-     victiminsert: function (data) {
+    },
+    victiminsert: function (data) {
         return new Promise(function (resolve, reject) {
             var connection = mysql.createPool({
                 host: '139.59.94.48',
@@ -747,65 +718,59 @@ module.exports = {
                 }
 
                 if (data.phoneNo) {
-                    queryValue += "'" + data.phoneNo+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No phoneNo field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.phoneNo + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No phoneNo field found" });
+                    connection.end();
+                    return;
+
                 }
 
                 if (data.Name) {
-                    queryValue += "'" + data.Name+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No Name field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.Name + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No Name field found" });
+                    connection.end();
+                    return;
+
                 }
 
                 if (data.Address) {
-                    queryValue += "'" + data.Address+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No Address field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.Address + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No Address field found" });
+                    connection.end();
+                    return;
+
                 }
 
                 if (data.Latitude) {
-                    queryValue += "'" + data.Latitude+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No Latitude field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.Latitude + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No Latitude field found" });
+                    connection.end();
+                    return;
+
                 }
                 if (data.Longitude) {
-                    queryValue += "'" + data.Longitude+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No Longitude field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.Longitude + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No Longitude field found" });
+                    connection.end();
+                    return;
+
                 }
 
                 if (data.AreaID) {
-                    queryValue += "'" + data.AreaID+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No AreaID field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.AreaID + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No AreaID field found" });
+                    connection.end();
+                    return;
+
                 }
                 queryValue += "'2019-01-01 00:00:00','2019-01-01 00:00:00','1.1.1.1','1')";
-        
+
 
                 connection.query(queryValue, function (err, result, fields) {
                     if (err) {
@@ -832,23 +797,22 @@ module.exports = {
                 database: 'LynkHack'
             });
             connection.getConnection(function (err) {
-                var queryValue = "SELECT * FROM LynkHack.VolunteerResourceMap as VRMap JOIN Volunteer as Vol on VRMap.VolunteerID = Vol.VolunteerID where VRMap.AreaID= ";
-                
+                var queryValue = "SELECT * FROM LynkHack.VolunteerResourceMap as VRMap JOIN Volunteer as Vol on VRMap.VolunteerID = Vol.VolunteerID where isCompleted=0 and VRMap.AreaID= ";
+
                 if (err) {
                     resolve({ "status": 400, "error": err });
                     connection.end();
                     return;
                 }
                 if (data.AreaID) {
-                    queryValue += " '" + data.AreaID+"'";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No AreaID field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += " '" + data.AreaID + "'";
+                } else {
+                    resolve({ "status": 400, "error": "No AreaID field found" });
+                    connection.end();
+                    return;
+
                 }
-                
+
                 connection.query(queryValue, function (err, result, fields) {
                     if (err) {
                         resolve({ "status": 400, "error": err });
@@ -867,7 +831,7 @@ module.exports = {
 
         });
     },
-     posthelpvictim: function (data) {
+    posthelpvictim: function (data) {
         return new Promise(function (resolve, reject) {
             var connection = mysql.createPool({
                 host: '139.59.94.48',
@@ -883,115 +847,103 @@ module.exports = {
                     return;
                 }
                 if (data.VictimID) {
-                    queryValue += "'" + data.VictimID+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No VictimID field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.VictimID + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No VictimID field found" });
+                    connection.end();
+                    return;
+
                 }
                 if (data.HelpID) {
-                    queryValue += "'" + data.HelpID+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No HelpID field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.HelpID + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No HelpID field found" });
+                    connection.end();
+                    return;
+
                 }
                 if (data.AreaID) {
-                    queryValue += "'" + data.AreaID+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No AreaID field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.AreaID + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No AreaID field found" });
+                    connection.end();
+                    return;
+
                 }
                 if (data.Description) {
-                    queryValue += "'" + data.Description+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No Description field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.Description + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No Description field found" });
+                    connection.end();
+                    return;
+
                 }
                 if (data.Members) {
-                    queryValue += "'" + data.Members+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No Members field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.Members + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No Members field found" });
+                    connection.end();
+                    return;
+
                 }
                 if (data.Male) {
-                    queryValue += "'" + data.Male+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No Male field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.Male + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No Male field found" });
+                    connection.end();
+                    return;
+
                 }
                 if (data.Female) {
-                    queryValue += "'" + data.Female+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No Female field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.Female + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No Female field found" });
+                    connection.end();
+                    return;
+
                 }
                 if (data.Children) {
-                    queryValue += "'" + data.Children+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No Children field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.Children + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No Children field found" });
+                    connection.end();
+                    return;
+
                 }
 
                 if (data.latitude) {
-                    queryValue += "'" + data.latitude+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No latitude field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.latitude + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No latitude field found" });
+                    connection.end();
+                    return;
+
                 }
                 if (data.longitude) {
-                    queryValue += "'" + data.longitude+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No longitude field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.longitude + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No longitude field found" });
+                    connection.end();
+                    return;
+
                 }
                 if (data.PhoneNo) {
-                    queryValue += "'" + data.PhoneNo+"',";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No PhoneNo field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.PhoneNo + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No PhoneNo field found" });
+                    connection.end();
+                    return;
+
                 }
-                
+
                 queryValue += "'2019-01-01 00:00:00','2019-01-01 00:00:00',"
                 if (data.isCompleted) {
-                    queryValue += "'" + data.isCompleted+"'";
-                }else
-                {
-                        resolve({ "status": 400, "error": "No VictimID field found" });
-                        connection.end();
-                        return;
-                    
+                    queryValue += "'" + data.isCompleted + "'";
+                } else {
+                    resolve({ "status": 400, "error": "No VictimID field found" });
+                    connection.end();
+                    return;
+
                 }
                 queryValue += ",'1')";
 
@@ -1011,4 +963,106 @@ module.exports = {
             });
         });
     },
+    updateprofile: function (data) {
+        return new Promise(function (resolve, reject) {
+            var connection = mysql.createPool({
+                host: '139.59.94.48',
+                user: 'playtowindbuser',
+                password: 'Gameuser@123',
+                database: 'LynkHack'
+            });
+            connection.getConnection(function (err) {
+                var queryValue = "UPDATE `LynkHack`.`Volunteer` SET `Name` = '" + data.Name + "', `Address` = '" + data.Address + "', `Latitude` = '" + data.Latitude + "', `Longitude` = '" + data.Longitude + "', `AreaID` = '" + data.AreaID + "' WHERE `VolunteerID` = '" + data.VolunteerID + "';";
+                var queryValue2 = "UPDATE `LynkHack`.`Victims` SET `Name` = '" + data.Name + "', `Address` = '" + data.Address + "', `Latitude` = '" + data.Latitude + "', `Longitude` = '" + data.Longitude + "', `AreaID` = '" + data.AreaID + "' WHERE `VictimID` = '" + data.VictimID + "';";
+
+                if (err) {
+                    resolve({ "status": 400, "error": err });
+                    connection.end();
+                    return;
+                }
+
+                connection.query(queryValue, function (err, result, fields) {
+                    if (err) {
+                        resolve({ "status": 400, "error": err });
+                        connection.end();
+                        return;
+                    }
+                    connection.query(queryValue2, function (err, result, fields) {
+                        if (err) {
+                            resolve({ "status": 400, "error": err });
+                            connection.end();
+                            return;
+                        }
+                        if (result) {
+                            resolve({ "status": 200, "data": result, "isSuccess": true });
+                        }
+                        connection.end();
+                        return;
+
+                    });
+
+                });
+            });
+
+
+        });
+    },
+    iscompletevolunteer: function (data) {
+       return new Promise(function (resolve, reject) {
+        var connection = mysql.createPool({
+            host: '139.59.94.48',
+            user: 'playtowindbuser',
+            password: 'Gameuser@123',
+            database: 'LynkHack'
+        });
+        connection.getConnection(function (err) {
+            var queryValue = "UPDATE `LynkHack`.`VolunteerResourceMap` SET `isCompleted` = '" + '1' + "' WHERE `VRMapID` = '" + data.VRMapID + "';";
+
+            connection.query(queryValue, function (err, result, fields) {
+                if (err) {
+                    resolve({ "status": 400, "error": err });
+                    connection.end();
+                    return;
+                }
+                if (result) {
+                    resolve({ "status": 200, "data": result, "isSuccess": true });
+                }
+                connection.end();
+                return;
+
+            });
+        });
+
+
+    });
+    },
+    iscompletevictim: function (data) {
+        return new Promise(function (resolve, reject) {
+         var connection = mysql.createPool({
+             host: '139.59.94.48',
+             user: 'playtowindbuser',
+             password: 'Gameuser@123',
+             database: 'LynkHack'
+         });
+         connection.getConnection(function (err) {
+             var queryValue = "UPDATE `LynkHack`.`VictimsHelpMap` SET `isCompleted` = '" + '1' + "' WHERE `VHMapID` = '" + data.VHMapID + "';";
+ 
+             connection.query(queryValue, function (err, result, fields) {
+                 if (err) {
+                     resolve({ "status": 400, "error": err });
+                     connection.end();
+                     return;
+                 }
+                 if (result) {
+                     resolve({ "status": 200, "data": result, "isSuccess": true });
+                 }
+                 connection.end();
+                 return;
+ 
+             });
+         });
+ 
+ 
+     });
+     }
 }
