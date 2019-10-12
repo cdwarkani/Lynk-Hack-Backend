@@ -365,6 +365,149 @@ module.exports = {
 
 
         });
+    },
+    updatearea: function (data) {
+        return new Promise(function (resolve, reject) {
+            var connection = mysql.createPool({
+                host: '139.59.94.48',
+                user: 'playtowindbuser',
+                password: 'Gameuser@123',
+                database: 'LynkHack'
+            });
+            connection.getConnection(function (err) {
+                var queryValue = "UPDATE `LynkHack`.`Volunteer` SET `AreaID` = ";
+                
+                if (err) {
+                    resolve({ "status": 400, "error": err });
+                    connection.end();
+                    return;
+                }
+                if (data.AreaID) {
+                    queryValue += "'" + data.AreaID+"'";
+                }else
+                {
+                        resolve({ "status": 400, "error": "No AreaID field found" });
+                        connection.end();
+                        return;
+                    
+                }
+                 queryValue += " WHERE `VolunteerID` =";
+
+                if (data.VolunteerID) {
+                    queryValue += "'" + data.VolunteerID+"';";
+                }else
+                {
+                        resolve({ "status": 400, "error": "No VolunteerID field found" });
+                        connection.end();
+                        return;
+                    
+                }
+
+                connection.query(queryValue, function (err, result, fields) {
+                    if (err) {
+                        resolve({ "status": 400, "error": err });
+                        connection.end();
+                        return;
+                    }
+                    if (result) {
+                        resolve({ "status": 200, "data": result, "isSuccess": true });
+                    }
+                    connection.end();
+                    return;
+
+                });
+            });
+
+
+        });
+    },
+    getgroupdetails: function (data) {
+        return new Promise(function (resolve, reject) {
+            var connection = mysql.createPool({
+                host: '139.59.94.48',
+                user: 'playtowindbuser',
+                password: 'Gameuser@123',
+                database: 'LynkHack'
+            });
+            connection.getConnection(function (err) {
+                var queryValue = "Select * from Groups where AreaID= ";
+                
+                if (err) {
+                    resolve({ "status": 400, "error": err });
+                    connection.end();
+                    return;
+                }
+                if (data.AreaID) {
+                    queryValue += " '" + data.AreaID+"'";
+                }else
+                {
+                        resolve({ "status": 400, "error": "No AreaID field found" });
+                        connection.end();
+                        return;
+                    
+                }
+                
+                connection.query(queryValue, function (err, result, fields) {
+                    if (err) {
+                        resolve({ "status": 400, "error": err });
+                        connection.end();
+                        return;
+                    }
+                    if (result) {
+                        resolve({ "status": 200, "data": result, "isSuccess": true });
+                    }
+                    connection.end();
+                    return;
+
+                });
+            });
+
+
+        });
+    },
+    getvictimdetails: function (data) {
+        return new Promise(function (resolve, reject) {
+            var connection = mysql.createPool({
+                host: '139.59.94.48',
+                user: 'playtowindbuser',
+                password: 'Gameuser@123',
+                database: 'LynkHack'
+            });
+            connection.getConnection(function (err) {
+                var queryValue = "Select * from Victims where AreaID= ";
+                
+                if (err) {
+                    resolve({ "status": 400, "error": err });
+                    connection.end();
+                    return;
+                }
+                if (data.AreaID) {
+                    queryValue += " '" + data.AreaID+"'";
+                }else
+                {
+                        resolve({ "status": 400, "error": "No AreaID field found" });
+                        connection.end();
+                        return;
+                    
+                }
+                
+                connection.query(queryValue, function (err, result, fields) {
+                    if (err) {
+                        resolve({ "status": 400, "error": err });
+                        connection.end();
+                        return;
+                    }
+                    if (result) {
+                        resolve({ "status": 200, "data": result, "isSuccess": true });
+                    }
+                    connection.end();
+                    return;
+
+                });
+            });
+
+
+        });
     }
 
 
