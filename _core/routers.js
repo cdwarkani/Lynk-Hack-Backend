@@ -6,9 +6,9 @@ var bodyParser = require('body-parser')
 
 // There will not be any authorisation because the request is going to be limited to Whitelisted IP
 
-router.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 10000000 }))		        // parse application/x-www-form-urlencoded
+router.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))		        // parse application/x-www-form-urlencoded
 router.use(bodyParser.text({ limit: '50mb', type: 'application/xml' }))		        // parse application/xml
-router.use(bodyParser.json({ limit: 1024 * 1024 * 1024*1024*20, type: 'application/json' }))  // parse application/json
+router.use(bodyParser.json({ limit: 1024 * 1024 * 20, type: 'application/json' }))  // parse application/json
 
 //adding it to set default directory for loading interface page
 router.use(express.static('public'));
@@ -29,7 +29,7 @@ router.post('/api/*', function(req, res){
     	
     	}
     	catch(e){
-    	console.log(e.stack);
+    	//console.log("failed");
     		res.status(404).json({status:{code: 404, message: "You have used an incorrect request methos (GET instead of POST?) or the requested resource does not exist"}}).end();
     	}
     	

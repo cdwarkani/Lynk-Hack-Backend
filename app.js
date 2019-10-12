@@ -10,11 +10,10 @@ app.use(expressStatus());			// status monitor
 app.enable('trust proxy');			// to get the actual ip address behind aws elb proxy
 
 //to define port from an argument
-var port = 3000;
+var port = 3004;
 if ((process.argv.length > 2) && (process.argv[2])) {
-    port = process.argv[2] ? process.argv[2] : 3000;
+    port = process.argv[2] ? process.argv[2] : port;
 }
-
 
 app.use(helmet());                  // to set the http headers
 app.use(compression());             // New call to compress content
@@ -25,26 +24,20 @@ process.on('exit', function () {
     console.log('app exit');
     process.exit();
 });
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
 // catch ctrl+c event and exit normally
 process.on('SIGINT', function () {
-    console.log('Ctrl-C...');
+    //console.log('Ctrl-C...');
     process.exit();
 });
 
 // TODO: IMPORTANT: Need to update this section
 //catch uncaught exceptions, trace, then exit normally
 process.on('uncaughtException', function (e) {
-  //  console.log('Uncaught Exception...');
+    console.log('Uncaught Exception...');
     console.log(e.stack);
-   
+    process.exit();
 });
-process.on('unhandledRejection', (reason, promise) => {
-    console.log('Unhandled Rejection at:', reason.stack || reason)
-    // Recommended: send the information to sentry.io
-    // or whatever crash reporting service you use
-   
-  })
 
 // start the server and listen to the port
 app.listen(port, function () {
