@@ -62,6 +62,7 @@ module.exports = {
             });
             connection.getConnection(function (err) {
                 var queryValue = "INSERT INTO `LynkHack`.`Volunteer` ( `PhoneNo`, `Name`, `Address`, `Latitude`, `Longitude`, `AreaID`, `createdOn`, `updatedOn`, `ipAddress`, `isActive`) VALUES (";
+                var queryValue2 = "INSERT INTO `LynkHack`.`Victims` ( `PhoneNo`, `Name`, `Address`, `Latitude`, `Longitude`, `AreaID`, `createdOn`, `updatedOn`, `ipAddress`, `isActive`) VALUES (";
                 if (err) {
                     resolve({ "status": 400, "error": err });
                     connection.end();
@@ -70,6 +71,7 @@ module.exports = {
 
                 if (data.phoneNo) {
                     queryValue += "'" + data.phoneNo+"',";
+                    queryValue2 += "'" + data.phoneNo+"',";
                 }else
                 {
                         resolve({ "status": 400, "error": "No phoneNo field found" });
@@ -80,6 +82,7 @@ module.exports = {
 
                 if (data.Name) {
                     queryValue += "'" + data.Name+"',";
+                    queryValue2 += "'" + data.Name+"',";
                 }else
                 {
                         resolve({ "status": 400, "error": "No Name field found" });
@@ -90,6 +93,7 @@ module.exports = {
 
                 if (data.Address) {
                     queryValue += "'" + data.Address+"',";
+                    queryValue2 += "'" + data.Address+"',";
                 }else
                 {
                         resolve({ "status": 400, "error": "No Address field found" });
@@ -100,6 +104,7 @@ module.exports = {
 
                 if (data.Latitude) {
                     queryValue += "'" + data.Latitude+"',";
+                    queryValue2 += "'" + data.Latitude+"',";
                 }else
                 {
                         resolve({ "status": 400, "error": "No Latitude field found" });
@@ -109,6 +114,7 @@ module.exports = {
                 }
                 if (data.Longitude) {
                     queryValue += "'" + data.Longitude+"',";
+                    queryValue2 += "'" + data.Longitude+"',";
                 }else
                 {
                         resolve({ "status": 400, "error": "No Longitude field found" });
@@ -119,6 +125,7 @@ module.exports = {
 
                 if (data.AreaID) {
                     queryValue += "'" + data.AreaID+"',";
+                    queryValue2 += "'" + data.AreaID+"',";
                 }else
                 {
                         resolve({ "status": 400, "error": "No AreaID field found" });
@@ -127,6 +134,7 @@ module.exports = {
                     
                 }
                 queryValue += "'2019-01-01 00:00:00','2019-01-01 00:00:00','1.1.1.1','1')";
+                queryValue2 += "'2019-01-01 00:00:00','2019-01-01 00:00:00','1.1.1.1','1')";
             
 
                 connection.query(queryValue, function (err, result, fields) {
@@ -135,11 +143,19 @@ module.exports = {
                         connection.end();
                         return;
                     }
-                    if (result) {
-                        resolve({ "status": 200, "data": result, "isNewUser": false, "isSuccess": true });
-                    }
-                    connection.end();
-                    return;
+                    connection.query(queryValue2, function (err, result, fields) {
+                        if (err) {
+                            resolve({ "status": 400, "error": err });
+                            connection.end();
+                            return;
+                        }
+                        if (result) {
+                            resolve({ "status": 200, "data": result, "isNewUser": false, "isSuccess": true });
+                        }
+                        connection.end();
+                        return;
+    
+                    });
 
                 });
             });
@@ -572,7 +588,7 @@ module.exports = {
                 database: 'LynkHack'
             });
             connection.getConnection(function (err) {
-                var queryValue = "INSERT INTO `LynkHack`.`VolunteerResourceMap` (`VolunteerID`, `HelpID`, `Description`, `createdOn`, `updatedOn`, `isCompleted`, `isActive`) VALUES (";
+                var queryValue = "INSERT INTO `LynkHack`.`VolunteerResourceMap` (`VolunteerID`, `AreaID`,`HelpID`, `Description`, `createdOn`, `updatedOn`, `isCompleted`, `isActive`) VALUES (";
                 if (err) {
                     resolve({ "status": 400, "error": err });
                     connection.end();
@@ -581,6 +597,17 @@ module.exports = {
 
 
                 if (data.VolunteerID) {
+                    queryValue += "'" + data.VolunteerID+"',";
+                }else
+                {
+                        resolve({ "status": 400, "error": "No VolunteerID field found" });
+                        connection.end();
+                        return;
+                    
+                }
+
+
+                if (data.AreaID) {
                     queryValue += "'" + data.VolunteerID+"',";
                 }else
                 {
@@ -641,7 +668,8 @@ module.exports = {
 
 
         });
-    },  victiminsert: function (data) {
+    }, 
+     victiminsert: function (data) {
         return new Promise(function (resolve, reject) {
             var connection = mysql.createPool({
                 host: '139.59.94.48',
@@ -732,10 +760,52 @@ module.exports = {
 
                 });
             });
+        });
+    },
+    getvolunteerdetails: function (data) {
+        return new Promise(function (resolve, reject) {
+            var connection = mysql.createPool({
+                host: '139.59.94.48',
+                user: 'playtowindbuser',
+                password: 'Gameuser@123',
+                database: 'LynkHack'
+            });
+            connection.getConnection(function (err) {
+                var queryValue = "Select * from VolunteerResourceMap where AreaID= ";
+                
+                if (err) {
+                    resolve({ "status": 400, "error": err });
+                    connection.end();
+                    return;
+                }
+                if (data.AreaID) {
+                    queryValue += " '" + data.AreaID+"'";
+                }else
+                {
+                        resolve({ "status": 400, "error": "No AreaID field found" });
+                        connection.end();
+                        return;
+                    
+                }
+                
+                connection.query(queryValue, function (err, result, fields) {
+                    if (err) {
+                        resolve({ "status": 400, "error": err });
+                        connection.end();
+                        return;
+                    }
+                    if (result) {
+                        resolve({ "status": 200, "data": result, "isSuccess": true });
+                    }
+                    connection.end();
+                    return;
+
+                });
+            });
 
 
         });
-    },
+    }
 
 
 }
