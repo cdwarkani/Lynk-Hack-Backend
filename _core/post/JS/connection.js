@@ -11,14 +11,14 @@ module.exports = {
             });
             
             connection.getConnection(function (err) {
-                var queryValue = "select * from Volunteer";
+                var queryValue = "SELECT * FROM LynkHack.Victims as Vi JOIN Volunteer as Vo on Vi.PhoneNo = Vo.PhoneNo";
                 if (err) {
                     resolve({ "status": 400, "error": err });
                     connection.end();
                     return;
                 }
                 if (data.phoneNo) {
-                    queryValue += " where PhoneNo = " + data.phoneNo;
+                    queryValue += " where Vi.PhoneNo = " + data.phoneNo;
                 }else
                 {
                         resolve({ "status": 400, "error": "No phoneNo field found" });
@@ -135,7 +135,16 @@ module.exports = {
                 }
                 queryValue += "'2019-01-01 00:00:00','2019-01-01 00:00:00','1.1.1.1','1')";
                 queryValue2 += "'2019-01-01 00:00:00','2019-01-01 00:00:00','1.1.1.1','1')";
-            
+                var queryValue3 = "SELECT * FROM LynkHack.Victims as Vi JOIN Volunteer as Vo on Vi.PhoneNo = Vo.PhoneNo";
+                if (data.phoneNo) {
+                    queryValue3 += " where Vi.PhoneNo ="+"'" + data.phoneNo+"';";;
+                }else
+                {
+                        resolve({ "status": 400, "error": "No phoneNo field found" });
+                        connection.end();
+                        return;
+                    
+                }
 
                 connection.query(queryValue, function (err, result, fields) {
                     if (err) {
@@ -149,11 +158,19 @@ module.exports = {
                             connection.end();
                             return;
                         }
-                        if (result) {
-                            resolve({ "status": 200, "data": result, "isNewUser": false, "isSuccess": true });
-                        }
-                        connection.end();
-                        return;
+                        connection.query(queryValue3, function (err, result, fields) {
+                            if (err) {
+                                resolve({ "status": 400, "error": err });
+                                connection.end();
+                                return;
+                            }
+                            if (result) {
+                                resolve({ "status": 200, "data": result, "isNewUser": false, "isSuccess": true });
+                            }
+                            connection.end();
+                            return;
+        
+                        });
     
                     });
 
@@ -544,6 +561,50 @@ module.exports = {
 
         });
     },
+    getprofiledetails: function (data) {
+        return new Promise(function (resolve, reject) {
+            var connection = mysql.createPool({
+                host: '139.59.94.48',
+                user: 'playtowindbuser',
+                password: 'Gameuser@123',
+                database: 'LynkHack'
+            });
+            connection.getConnection(function (err) {
+                var queryValue = "Select * from VictimsHelpMap where AreaID= ";
+                
+                if (err) {
+                    resolve({ "status": 400, "error": err });
+                    connection.end();
+                    return;
+                }
+                if (data.AreaID) {
+                    queryValue += " '" + data.AreaID+"'";
+                }else
+                {
+                        resolve({ "status": 400, "error": "No AreaID field found" });
+                        connection.end();
+                        return;
+                    
+                }
+                
+                connection.query(queryValue, function (err, result, fields) {
+                    if (err) {
+                        resolve({ "status": 400, "error": err });
+                        connection.end();
+                        return;
+                    }
+                    if (result) {
+                        resolve({ "status": 200, "data": result, "isSuccess": true });
+                    }
+                    connection.end();
+                    return;
+
+                });
+            });
+
+
+        });
+    },
     gethelpertypes: function (data) {
         return new Promise(function (resolve, reject) {
             var connection = mysql.createPool({
@@ -771,7 +832,7 @@ module.exports = {
                 database: 'LynkHack'
             });
             connection.getConnection(function (err) {
-                var queryValue = "Select * from VolunteerResourceMap where AreaID= ";
+                var queryValue = "SELECT * FROM LynkHack.VolunteerResourceMap as VRMap JOIN Volunteer as Vol on VRMap.VolunteerID = Vol.VolunteerID where VRMap.AreaID= ";
                 
                 if (err) {
                     resolve({ "status": 400, "error": err });
@@ -805,7 +866,149 @@ module.exports = {
 
 
         });
-    }
+    },
+     posthelpvictim: function (data) {
+        return new Promise(function (resolve, reject) {
+            var connection = mysql.createPool({
+                host: '139.59.94.48',
+                user: 'playtowindbuser',
+                password: 'Gameuser@123',
+                database: 'LynkHack'
+            });
+            connection.getConnection(function (err) {
+                var queryValue = "INSERT INTO `LynkHack`.`VictimsHelpMap` (`VictimID`,`HelpID`, `AreaID`, `Description`, `Members`, `Male`, `Female`, `Children`, `latitude`, `longitude`, `PhoneNo`, `createdOn`, `updatedOn`, `isCompleted`, `isActive`) VALUES (";
+                if (err) {
+                    resolve({ "status": 400, "error": err });
+                    connection.end();
+                    return;
+                }
+                if (data.VictimID) {
+                    queryValue += "'" + data.VictimID+"',";
+                }else
+                {
+                        resolve({ "status": 400, "error": "No VictimID field found" });
+                        connection.end();
+                        return;
+                    
+                }
+                if (data.HelpID) {
+                    queryValue += "'" + data.HelpID+"',";
+                }else
+                {
+                        resolve({ "status": 400, "error": "No HelpID field found" });
+                        connection.end();
+                        return;
+                    
+                }
+                if (data.AreaID) {
+                    queryValue += "'" + data.AreaID+"',";
+                }else
+                {
+                        resolve({ "status": 400, "error": "No AreaID field found" });
+                        connection.end();
+                        return;
+                    
+                }
+                if (data.Description) {
+                    queryValue += "'" + data.Description+"',";
+                }else
+                {
+                        resolve({ "status": 400, "error": "No Description field found" });
+                        connection.end();
+                        return;
+                    
+                }
+                if (data.Members) {
+                    queryValue += "'" + data.Members+"',";
+                }else
+                {
+                        resolve({ "status": 400, "error": "No Members field found" });
+                        connection.end();
+                        return;
+                    
+                }
+                if (data.Male) {
+                    queryValue += "'" + data.Male+"',";
+                }else
+                {
+                        resolve({ "status": 400, "error": "No Male field found" });
+                        connection.end();
+                        return;
+                    
+                }
+                if (data.Female) {
+                    queryValue += "'" + data.Female+"',";
+                }else
+                {
+                        resolve({ "status": 400, "error": "No Female field found" });
+                        connection.end();
+                        return;
+                    
+                }
+                if (data.Children) {
+                    queryValue += "'" + data.Children+"',";
+                }else
+                {
+                        resolve({ "status": 400, "error": "No Children field found" });
+                        connection.end();
+                        return;
+                    
+                }
 
+                if (data.latitude) {
+                    queryValue += "'" + data.latitude+"',";
+                }else
+                {
+                        resolve({ "status": 400, "error": "No latitude field found" });
+                        connection.end();
+                        return;
+                    
+                }
+                if (data.longitude) {
+                    queryValue += "'" + data.longitude+"',";
+                }else
+                {
+                        resolve({ "status": 400, "error": "No longitude field found" });
+                        connection.end();
+                        return;
+                    
+                }
+                if (data.PhoneNo) {
+                    queryValue += "'" + data.PhoneNo+"',";
+                }else
+                {
+                        resolve({ "status": 400, "error": "No PhoneNo field found" });
+                        connection.end();
+                        return;
+                    
+                }
+                
+                queryValue += "'2019-01-01 00:00:00','2019-01-01 00:00:00',"
+                if (data.isCompleted) {
+                    queryValue += "'" + data.isCompleted+"'";
+                }else
+                {
+                        resolve({ "status": 400, "error": "No VictimID field found" });
+                        connection.end();
+                        return;
+                    
+                }
+                queryValue += ",'1')";
 
+                connection.query(queryValue, function (err, result, fields) {
+                    if (err) {
+                        resolve({ "status": 400, "error": err });
+                        connection.end();
+                        return;
+                    }
+                    if (result) {
+                        resolve({ "status": 200, "data": result, "isNewUser": false, "isSuccess": true });
+                    }
+                    connection.end();
+                    return;
+
+                });
+            });
+        });
+    },
 }
