@@ -171,7 +171,130 @@ module.exports = {
 
 
         });
-    }, getstates: function (data) {
+    },
+    ngoauth: function (data) {
+        return new Promise(function (resolve, reject) {
+            var connection = mysql.createPool({
+                host: '139.59.94.48',
+                user: 'playtowindbuser',
+                password: 'Gameuser@123',
+                database: 'LynkHack'
+            });
+
+            connection.getConnection(function (err) {
+                var queryValue = "SELECT * FROM LynkHack.Organizations ";
+                if (err) {
+                    resolve({ "status": 400, "error": err });
+                    connection.end();
+                    return;
+                }
+                if (data.phoneNo) {
+                    queryValue += "where PhoneNo = " + data.phoneNo;
+                } else {
+                    resolve({ "status": 400, "error": "No phoneNo field found" });
+                    connection.end();
+                    return;
+
+                }
+                if (data.lowLimit && data.HighLimit) {
+                    queryValue += " LIMIT " + data.lowLimit + "," + data.HighLimit;
+                }
+
+                connection.query(queryValue, function (err, result, fields) {
+                    if (err) {
+                        resolve({ "status": 400, "error": err });
+                        connection.end();
+                        return;
+                    }
+                    if (result.length && result.length > 0) {
+                        resolve({ "status": 200, "data": result, "isNewUser": false, "isSuccess": true });
+                    } else {
+                        resolve({ "status": 200, "isNewUser": true, "isSuccess": true });
+                    }
+
+
+                    connection.end();
+                    return;
+
+                });
+            });
+
+
+        });
+    },
+    ngoinsert: function (data) {
+        return new Promise(function (resolve, reject) {
+            var connection = mysql.createPool({
+                host: '139.59.94.48',
+                user: 'playtowindbuser',
+                password: 'Gameuser@123',
+                database: 'LynkHack'
+            });
+            connection.getConnection(function (err) {
+                var queryValue = "INSERT INTO `LynkHack`.`Organizations` ( `PhoneNo`, `Name`,`GSTIn`,`Description`, `createdOn`, `updatedOn`, `isActive`) VALUES (";
+                if (err) {
+                    resolve({ "status": 400, "error": err });
+                    connection.end();
+                    return;
+                }
+
+                if (data.phoneNo) {
+                    queryValue += "'" + data.phoneNo + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No phoneNo field found" });
+                    connection.end();
+                    return;
+
+                }
+
+                if (data.Name) {
+                    queryValue += "'" + data.Name + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No Name field found" });
+                    connection.end();
+                    return;
+
+                }
+
+                if (data.GSTIn) {
+                    queryValue += "'" + data.GSTIn + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No GSTIn field found" });
+                    connection.end();
+                    return;
+
+                }
+
+                if (data.Description) {
+                    queryValue += "'" + data.Description + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No Description field found" });
+                    connection.end();
+                    return;
+
+                }
+            
+                queryValue += "'2019-01-01 00:00:00','2019-01-01 00:00:00','1')";
+
+
+                connection.query(queryValue, function (err, result, fields) {
+                    if (err) {
+                        resolve({ "status": 400, "error": err });
+                        connection.end();
+                        return;
+                    }
+                    resolve({ "status": 200, "data": result, "isSuccess": true });
+
+                    connection.end();
+                    return;
+
+                });
+            });
+
+
+        });
+    },
+    getstates: function (data) {
         return new Promise(function (resolve, reject) {
             var connection = mysql.createPool({
                 host: '139.59.94.48',
@@ -203,7 +326,8 @@ module.exports = {
 
 
         });
-    }, getcities: function (data) {
+    },
+    getcities: function (data) {
         return new Promise(function (resolve, reject) {
             var connection = mysql.createPool({
                 host: '139.59.94.48',
@@ -243,7 +367,8 @@ module.exports = {
 
 
         });
-    }, getareas: function (data) {
+    },
+    getareas: function (data) {
         return new Promise(function (resolve, reject) {
             var connection = mysql.createPool({
                 host: '139.59.94.48',
@@ -283,7 +408,8 @@ module.exports = {
 
 
         });
-    }, getvictimshelpmap: function (data) {
+    },
+    getvictimshelpmap: function (data) {
         return new Promise(function (resolve, reject) {
             var connection = mysql.createPool({
                 host: '139.59.94.48',
@@ -300,7 +426,7 @@ module.exports = {
                     return;
                 }
                 if (data.VictimID) {
-                    queryValue += " where VictimID = " + data.VictimID;
+                    queryValue += " where isCompleted=0 and VictimID = " + data.VictimID;
                 } else {
                     resolve({ "status": 400, "error": "No CityID field found" });
                     connection.end();
@@ -323,7 +449,8 @@ module.exports = {
 
 
         });
-    }, getvolunteerhelpmap: function (data) {
+    },
+    getvolunteerhelpmap: function (data) {
         return new Promise(function (resolve, reject) {
             var connection = mysql.createPool({
                 host: '139.59.94.48',
@@ -340,7 +467,7 @@ module.exports = {
                     return;
                 }
                 if (data.VolunteerID) {
-                    queryValue += " where VolunteerID = " + data.VolunteerID;
+                    queryValue += " where isCompleted=0 and VolunteerID = " + data.VolunteerID;
                 } else {
                     resolve({ "status": 400, "error": "No VolunteerID field found" });
                     connection.end();
@@ -724,7 +851,7 @@ module.exports = {
 
 
                 if (data.AreaID) {
-                    queryValue += "'" + data.VolunteerID + "',";
+                    queryValue += "'" + data.AreaID + "',";
                 } else {
                     resolve({ "status": 400, "error": "No VolunteerID field found" });
                     connection.end();
@@ -1136,6 +1263,39 @@ module.exports = {
                     if (result) {
                         resolve({ "status": 200, "data": result, "isSuccess": true });
                     }
+                    connection.end();
+                    return;
+
+                });
+            });
+
+
+        });
+    },
+    getngodetails: function (data) {
+        return new Promise(function (resolve, reject) {
+            var connection = mysql.createPool({
+                host: '139.59.94.48',
+                user: 'playtowindbuser',
+                password: 'Gameuser@123',
+                database: 'LynkHack'
+            });
+
+            connection.getConnection(function (err) {
+                var queryValue = "select * from Organizations";
+                if (err) {
+                    resolve({ "status": 400, "error": err });
+                    connection.end();
+                    return;
+                }
+                connection.query(queryValue, function (err, result, fields) {
+                    if (err) {
+                        resolve({ "status": 400, "error": err });
+                        connection.end();
+                        return;
+                    }
+                    resolve({ "status": 200, "data": result, "isSuccess": true });
+
                     connection.end();
                     return;
 
