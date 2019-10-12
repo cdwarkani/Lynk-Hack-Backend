@@ -1,0 +1,22 @@
+{
+    "author": [{
+        "midAppend":" ",
+        "seperation":", ", 
+        "endAppend":"."
+    }],
+    "journal":  [{
+        "preAppend":" "
+    }],
+    "title":  [{
+        "preAppend":" "
+    }],
+    "date":[{
+        "preAppend":" "
+    }],
+    "volume":[{
+        "preAppend":";"
+    }],
+    "fpage":[{
+        "preAppend":":"
+    }]
+}

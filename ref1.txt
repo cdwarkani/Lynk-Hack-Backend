@@ -1,0 +1,66 @@
+460 client timeout, 502 bad gateway, 504 gateway   timeout, 503 service unavailable
+References
+1. R.N. Calheiros, R. Ranjany, and R. Buyya, “Virtual Machine Provisioning Based on
+Analytical Performance and QoS in Cloud Computing Environments,” in Parallel
+Processing (ICPP), International Conference September, 2011, pp. 295- 304.
+2. X. Kong, C. Lin, Y. Jiang, W. Yan, X. Chu, “Efficient dynamic task scheduling in
+virtualized data centers with fuzzy prediction,” in Journal of Network and Computer
+Applications, 34(4), 2010, 1068- 1077.
+3. R. Buyya, A. Beloglazov, J. Abawajy, “Energy-Efficient Management of Data Center
+Resources for Cloud Computing: A Vision, Architectural Elements, and Open
+Challenges,” Proceedings of the 7th High Computing and Simulation (HPCS 2009)
+Conference, Germany, June 21-24,2009
+4. Zhang, et al.: Agile resource management in a virtualized data center. In: Proc. Of Ist
+Joint WOSP/SIPEW Intl. Conf. on Perf. Eng., California, USA (2010)
+5. Rodrigo N. Calheiros, Rajiv Ranjan, Anton Beloglazov, Cesar A. F. De Rose and
+Rajkumar Buyya, “CloudSim: a  toolkit for modeling and simulation of cloud
+computing environments and evaluation of resource provisioning algorithms”.
+6. Trieu C. Chieu, Ajay Mohindra, Alexei A. Karve and Alla Segal, “Dynamic Scaling
+of Web Applications in a Virtualized Cloud Computing Environment” In 2009 IEEE
+International Conference on e-Business Engineering.
+7. Udhayakumar Shanmugam, Latha Tamilselvan, Uma Nandhini and Dhinakaran,
+Attestation for Trusted Computing to Assure Security in Cloud Deployment Services,”
+in International Journal of Information and Electronics Engineering, Vol. 2, No. 4
+(2012), pp644-648.
+8. Yaniv Taigman, Ming Yang, Marc Aurelio Ranzato and Lior Wolf, “DeepFace:
+Closing the Gap to Human level performance in Face verification”. In Conference on
+Computer vision and pattern recognition (CVPR) June 24, 2014.
+9. Udhayakumar Shanmugam, S. Chandrasekaran, Latha Tamilselvan and Fareez
+Ahmed, “An Adaptive Trust Model for Software Services in a Hybrid Cloud
+Environment,” Recent Researches in Computer Science, Proceedings of the 15th
+WSEAS International Conference on Computers, September, (2011), pp. 497-502.
+10. Udhayakumar Shanmugam and Latha TamilSelvan, “A Cooperative Trust Model with
+Adaptive Migration for Secure Cloud Services”, In Advances in Information Sciences
+and Service Sciences, Volume 6, Number 6, December, pp. 37-47, 2014
+1. R.N. Calheiros, R. Ranjany, and R. Buyya, “Virtual Machine Provisioning Based on
+Analytical Performance and QoS in Cloud Computing Environments,” in Parallel
+Processing (ICPP), International Conference September, 2011, pp. 295- 304.
+2. X. Kong, C. Lin, Y. Jiang, W. Yan, X. Chu, “Efficient dynamic task scheduling in
+virtualized data centers with fuzzy prediction,” in Journal of Network and Computer
+Applications, 34(4), 2010, 1068- 1077.
+3. R. Buyya, A. Beloglazov, J. Abawajy, “Energy-Efficient Management of Data Center
+Resources for Cloud Computing: A Vision, Architectural Elements, and Open
+Challenges,” Proceedings of the 7th High Computing and Simulation (HPCS 2009)
+Conference, Germany, June 21-24,2009
+4. Zhang, et al.: Agile resource management in a virtualized data center. In: Proc. Of Ist
+Joint WOSP/SIPEW Intl. Conf. on Perf. Eng., California, USA (2010)
+5. Rodrigo N. Calheiros, Rajiv Ranjan, Anton Beloglazov, Cesar A. F. De Rose and
+Rajkumar Buyya, “CloudSim: a toolkit for modeling and simulation of cloud
+computing environments and evaluation of resource provisioning algorithms”.
+6. Trieu C. Chieu, Ajay Mohindra, Alexei A. Karve and Alla Segal, “Dynamic Scaling
+of Web Applications in a Virtualized Cloud Computing Environment” In 2009 IEEE
+International Conference on e-Business Engineering.
+7. Udhayakumar Shanmugam, Latha Tamilselvan, Uma Nandhini and Dhinakaran,
+Attestation for Trusted Computing to Assure Security in Cloud Deployment Services,”
+in International Journal of Information and Electronics Engineering, Vol. 2, No. 4
+(2012), pp644-648.
+8. Yaniv Taigman, Ming Yang, Marc Aurelio Ranzato and Lior Wolf, “DeepFace:
+Closing the Gap to Human level performance in Face verification”. In Conference on
+Computer vision and pattern recognition (CVPR) June 24, 2014.
+9. Udhayakumar Shanmugam, S. Chandrasekaran, Latha Tamilselvan and Fareez
+Ahmed, “An Adaptive Trust Model for Software Services in a Hybrid Cloud
+Environment,” Recent Researches in Computer Science, Proceedings of the 15th
+WSEAS International Conference on Computers, September, (2011), pp. 497-502.
+10. Udhayakumar Shanmugam and Latha TamilSelvan, “A Cooperative Trust Model with
+Adaptive Migration for Secure Cloud Services”, In Advances in Information Sciences
+and Service Sciences, Volume 6, Number 6, December, pp. 37-47, 2014

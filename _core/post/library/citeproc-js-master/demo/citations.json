@@ -1,0 +1,20 @@
+{
+  "Item-1": { 
+"id": "Item-1",
+    "title": "GenBank.",
+  "volume": "41",
+
+  "page": "D36-42",
+  "container-title": "Nucleic acids research",
+  "container-title-short": "Nucleic Acids Res.",
+  "ISSN": "1362-4962",
+  "issued": "{date_parts: [2012, 11, 27] }",
+  "PMID": "23193287",
+  "PMCID": "PMC3531190",
+  "DOI": "10.1093/nar/gks1195",
+  "author": [{"family":"Benson","given":"Dennis A"},{"family":"Cavanaugh","given":"Mark"},{"family":"Clark","given":"Karen"},{"family":"Karsch-Mizrachi","given":"Ilene"},{"family":"Lipman","given":"David J"},{"family":"Ostell","given":"James"},{"family":"Sayers","given":"Eric W"}],
+  "abstract": "GenBank® (http://www.ncbi.nlm.nih.gov) is a comprehensive database that contains publicly available nucleotide sequences for almost 260 000 formally described species. These sequences are obtained primarily through submissions from individual laboratories and batch submissions from large-scale sequencing projects, including whole-genome shotgun (WGS) and environmental sampling projects. Most submissions are made using the web-based BankIt or standalone Sequin programs, and GenBank staff assigns accession numbers upon data receipt. Daily data exchange with the European Nucleotide Archive (ENA) and the DNA Data Bank of Japan (DDBJ) ensures worldwide coverage. GenBank is accessible through the NCBI Entrez retrieval system, which integrates data from the major DNA and protein sequence databases along with taxonomy, genome, mapping, protein structure and domain information, and the biomedical journal literature via PubMed. BLAST provides sequence similarity searches of GenBank and other sequence databases. Complete bimonthly releases and daily updates of the GenBank database are available by FTP. To access GenBank and its related retrieval and analysis services, begin at the NCBI home page: www.ncbi.nlm.nih.gov.",
+  "URL": "https://www.ncbi.nlm.nih.gov/pubmed/23193287",
+  "type": "article-journal" }
+
+}
