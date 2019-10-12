@@ -270,7 +270,7 @@ module.exports = {
                 database: 'LynkHack'
             });
             connection.getConnection(function (err) {
-                var queryValue = "INSERT INTO `LynkHack`.`Groups` (`VolunteerID`, `AreaID`, `Name`, `Description`, `Members`, `link`, `createdOn`, `updatedOn`, `isCompleted`, `isActive`) VALUES (";
+                var queryValue = "INSERT INTO `LynkHack`.`Groups` (`VolunteerID`, `AreaID`, `Name`, `Description`, `Members`, `link`, `createdOn`, `updatedOn`, `isCompleted`,`latitude`,`longitude`, `isActive`) VALUES (";
                 if (err) {
                     resolve({ "status": 400, "error": err });
                     connection.end();
@@ -335,9 +335,28 @@ module.exports = {
                         return;
                     
                 }
+               
                 queryValue += "'2019-01-01 00:00:00','2019-01-01 00:00:00'";
+                if (data.latitude) {
+                    queryValue += ",'" + data.latitude+"',";
+                }else
+                {
+                        resolve({ "status": 400, "error": "No latitude field found" });
+                        connection.end();
+                        return;
+                    
+                }
+                if (data.longitude) {
+                    queryValue += "'" + data.longitude+"',";
+                }else
+                {
+                        resolve({ "status": 400, "error": "No longitude field found" });
+                        connection.end();
+                        return;
+                    
+                }
                 if (data.isCompleted) {
-                    queryValue += ",'" + data.isCompleted+"',";
+                    queryValue += "'" + data.isCompleted+"',";
                 }else
                 {
                         resolve({ "status": 400, "error": "No isCompleted field found" });
@@ -489,6 +508,41 @@ module.exports = {
                         connection.end();
                         return;
                     
+                }
+                
+                connection.query(queryValue, function (err, result, fields) {
+                    if (err) {
+                        resolve({ "status": 400, "error": err });
+                        connection.end();
+                        return;
+                    }
+                    if (result) {
+                        resolve({ "status": 200, "data": result, "isSuccess": true });
+                    }
+                    connection.end();
+                    return;
+
+                });
+            });
+
+
+        });
+    },
+    gethelpertypes: function (data) {
+        return new Promise(function (resolve, reject) {
+            var connection = mysql.createPool({
+                host: '139.59.94.48',
+                user: 'playtowindbuser',
+                password: 'Gameuser@123',
+                database: 'LynkHack'
+            });
+            connection.getConnection(function (err) {
+                var queryValue = "Select * from HelpType ";
+                
+                if (err) {
+                    resolve({ "status": 400, "error": err });
+                    connection.end();
+                    return;
                 }
                 
                 connection.query(queryValue, function (err, result, fields) {
