@@ -1304,5 +1304,118 @@ module.exports = {
 
 
         });
+    },
+    getngofunddetails: function (data) {
+        return new Promise(function (resolve, reject) {
+            var connection = mysql.createPool({
+                host: '139.59.94.48',
+                user: 'playtowindbuser',
+                password: 'Gameuser@123',
+                database: 'LynkHack'
+            });
+
+            connection.getConnection(function (err) {
+                var queryValue = "select * from OrganizationsFunds";
+                if (err) {
+                    resolve({ "status": 400, "error": err });
+                    connection.end();
+                    return;
+                }
+                connection.query(queryValue, function (err, result, fields) {
+                    if (err) {
+                        resolve({ "status": 400, "error": err });
+                        connection.end();
+                        return;
+                    }
+                    resolve({ "status": 200, "data": result, "isSuccess": true });
+
+                    connection.end();
+                    return;
+
+                });
+            });
+
+
+        });
+    },
+    ngofundinsert: function (data) {
+        return new Promise(function (resolve, reject) {
+            var connection = mysql.createPool({
+                host: '139.59.94.48',
+                user: 'playtowindbuser',
+                password: 'Gameuser@123',
+                database: 'LynkHack'
+            });
+            connection.getConnection(function (err) {
+                var queryValue = "INSERT INTO `LynkHack`.`OrganizationsFunds` (`OrgID`, `Name`, `Description`, `Sponsor`, `Link`, `createdOn`, `updatedOn`, `isActive`) VALUES (";
+                if (err) {
+                    resolve({ "status": 400, "error": err });
+                    connection.end();
+                    return;
+                }
+
+                if (data.OrgID) {
+                    queryValue += "'" + data.OrgID + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No OrgID field found" });
+                    connection.end();
+                    return;
+
+                }
+
+                if (data.Name) {
+                    queryValue += "'" + data.Name + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No Name field found" });
+                    connection.end();
+                    return;
+
+                }
+
+                if (data.Description) {
+                    queryValue += "'" + data.Description + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No Description field found" });
+                    connection.end();
+                    return;
+
+                }
+
+                if (data.Sponsor) {
+                    queryValue += "'" + data.Sponsor + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No Sponsor field found" });
+                    connection.end();
+                    return;
+
+                }
+                if (data.Link) {
+                    queryValue += "'" + data.Link + "',";
+                } else {
+                    resolve({ "status": 400, "error": "No Link field found" });
+                    connection.end();
+                    return;
+
+                }
+            
+                queryValue += "'2019-01-01 00:00:00','2019-01-01 00:00:00','1')";
+
+
+                connection.query(queryValue, function (err, result, fields) {
+                    if (err) {
+                        resolve({ "status": 400, "error": err });
+                        connection.end();
+                        return;
+                    }
+                    resolve({ "status": 200, "data": result, "isSuccess": true });
+
+                    connection.end();
+                    return;
+
+                });
+            });
+
+
+        });
     }
 }
